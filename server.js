@@ -11,7 +11,7 @@ const MODEL = process.env.MODEL || 'gpt-5.6-luna';
 const client = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
 
 app.use(express.json({limit:'1mb'}));
-app.use(express.static(path.join(__dirname,'public')));
+app.get('/*splat',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
 
 app.get('/api/status', (req,res)=>res.json({ok:true, configured:!!client, model:MODEL}));
 
